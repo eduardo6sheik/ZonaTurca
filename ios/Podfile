@@ -79,6 +79,8 @@ target 'ZonaTurca' do
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
+  pod 'RNFBMessaging', :path => '../node_modules/@react-native-firebase/messaging'
+
   target 'ZonaTurcaTests' do
     inherit! :complete
     # Pods for testing

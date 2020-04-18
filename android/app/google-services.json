@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1095929006981",
+    "firebase_url": "https://zonaturca-6fbb4.firebaseio.com",
+    "project_id": "zonaturca-6fbb4",
+    "storage_bucket": "zonaturca-6fbb4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095929006981:android:83c3eeb7448d8cbbd8d2ec",
+        "android_client_info": {
+          "package_name": "com.zonaturca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095929006981-uvjte1dps75ir4pc0pqvn50lse6ehd57.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4RXGveq_KvyLzxxMEYp6Zi5EBCNxhofo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095929006981-uvjte1dps75ir4pc0pqvn50lse6ehd57.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
