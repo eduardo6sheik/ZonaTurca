@@ -81,6 +81,10 @@ target 'ZonaTurca' do
 
   pod 'RNFBMessaging', :path => '../node_modules/@react-native-firebase/messaging'
 
+  pod 'RNFBFirestore', :path => '../node_modules/@react-native-firebase/firestore'
+
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'ZonaTurcaTests' do
     inherit! :complete
     # Pods for testing
