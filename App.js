@@ -27,26 +27,39 @@ export default class MyWeb extends Component {
   }
 
   indentificarEntrada = async () =>{
-    firestore().collection('notification').doc('datos').get()
-    .then(snapshot => {
-      if (snapshot.data().enviada == true) {
-        this.setState({
-          url: snapshot.data().url,
-        });
 
+    AsyncStorage.getItem('noti').then(data => {
+      if (data == null) {
+        const check = {
+          url: 'https://zonaturca.com/'
+        };
+        AsyncStorage.setItem('noti', JSON.stringify(check))
+      }else{
         this.notificationVerificada();
       }
+    })
+
+}
+
+  notificationVerificada = async () =>{
+    firestore().collection('notification').doc('datos').get()
+    .then(snapshot => {
+      AsyncStorage.getItem('noti').then(data => {
+        let info = JSON.parse(data);
+        if (info.url != snapshot.data().url) {
+          this.setState({
+            url: snapshot.data().url,
+          });
+          const check = {
+            url: snapshot.data().url
+          };
+          AsyncStorage.setItem('noti', JSON.stringify(check))
+        }
+      })
     })
     .catch(err => {
       console.log('Error getting documents', err);
     });
-  }
-
-  notificationVerificada = async () =>{
-    firestore().collection('notification').doc('datos')
-    .update({
-      enviada: false,
-    })
   }
 
   activivarNotificaciones = async () =>{
