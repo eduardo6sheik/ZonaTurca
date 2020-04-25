@@ -5,6 +5,9 @@ import {
   StyleSheet,
   View,
   Text,
+  Image,
+  ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 import firestore from '@react-native-firebase/firestore';
@@ -16,6 +19,7 @@ export default class MyWeb extends Component {
     super(props);
     this.state = {
       url: 'https://zonaturca.com/',
+      loading: true,
     };
   }
 
@@ -34,6 +38,9 @@ export default class MyWeb extends Component {
           url: 'https://zonaturca.com/'
         };
         AsyncStorage.setItem('noti', JSON.stringify(check))
+        this.setState({
+          loading: false,
+        });
       }else{
         this.notificationVerificada();
       }
@@ -45,6 +52,9 @@ export default class MyWeb extends Component {
     firestore().collection('notification').doc('datos').get()
     .then(snapshot => {
       AsyncStorage.getItem('noti').then(data => {
+        this.setState({
+          loading: false,
+        });
         let info = JSON.parse(data);
         if (info.url != snapshot.data().url) {
           this.setState({
@@ -141,12 +151,39 @@ export default class MyWeb extends Component {
   }
   render() {
     console.log(this.state.token);
-    return (
-      <View style={{ backgroundColor: 'blue',flex: 1 }}>
-        <WebView
-          source={{ uri: this.state.url }}
-        />
-      </View>
-    );
+    if (this.state.loading == true) {
+      return(
+        <View style={{
+          flex: 1,
+          backgroundColor: '#111010',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+          <Image source={require('./assest/Zona_Turca.png')} style={{width: 60, height: 60, marginBottom: 10,}} />
+          <ActivityIndicator size="large" color="#e30a17" />
+
+        </View>
+      );
+    }else {
+      return (
+        <View style={{ backgroundColor: 'blue',flex: 1 }}>
+          <WebView
+            style={{backgroundColor: '#111010',}}
+            source={{ uri: this.state.url }}
+            renderError={errorName =>
+              <View style={{
+                flex: 1,
+                backgroundColor: '#111010',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+                <TouchableOpacity onPress={() => this.setState({url: 'https://zonaturca.com/',})} style={{padding: 10, backgroundColor: '#e30a17', borderRadius: 10,}}>
+                  <Text style={{color: '#ffffff', fontSize: 24,}}>Volver a cargar</Text>
+                </TouchableOpacity>
+              </View>}
+          />
+        </View>
+      );
+    }
   }
 }
