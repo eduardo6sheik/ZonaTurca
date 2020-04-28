@@ -12,6 +12,7 @@ import {
 import messaging from '@react-native-firebase/messaging';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-community/async-storage';
+import RNRestart from 'react-native-restart';
 
 export default class MyWeb extends Component {
 
@@ -149,6 +150,10 @@ export default class MyWeb extends Component {
       }
     })
   }
+
+  reiniciar(){
+    RNRestart.Restart();
+  }
   render() {
     console.log(this.state.token);
     if (this.state.loading == true) {
@@ -177,7 +182,9 @@ export default class MyWeb extends Component {
                 alignItems: 'center',
                 justifyContent: 'center',
               }}>
-                <TouchableOpacity onPress={() => this.setState({url: 'https://zonaturca.com/',})} style={{padding: 10, backgroundColor: '#e30a17', borderRadius: 10,}}>
+                <Text style={{color: '#ffffff', fontSize: 24, marginBottom: 10, }}>LO SENTIMOS 😭</Text>
+                <Text style={{color: '#ffffff', fontSize: 18, marginBottom: 20, marginLeft: 30, marginRight: 30, textAlign: 'center',}}>Este error es debido a la publicidad de los reproductores gratuitos.{'\n'}{'\n'}Para evitar este problema te recomendamos hacerte miembro VIP 😍</Text>
+                <TouchableOpacity onPress={this.reiniciar} style={{padding: 10, backgroundColor: '#e30a17', borderRadius: 10,}}>
                   <Text style={{color: '#ffffff', fontSize: 24,}}>Volver a cargar</Text>
                 </TouchableOpacity>
               </View>}
